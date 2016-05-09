@@ -43,7 +43,7 @@ module.exports = {
             }
         })
     ],
-    module: {
+   module: {
         loaders: [{
             test: /\.jsx?$/,
             loaders: ['babel'],
@@ -53,9 +53,13 @@ module.exports = {
             loader: 'style!css!less',
             include: path.resolve('css')
         }, {
-            test: /\.(png|jpg)$/,
+            test: /\.(gif|png|jpg)$/,
             include: path.resolve('img'),
             loader: 'url-loader?limit=8192'
+        }, {
+            test: /\.(ttf|woff|eot|svg)$/,
+            include: path.resolve('font'),
+            loader: 'file-loader?limit=8192'
         }]
     }
 };
