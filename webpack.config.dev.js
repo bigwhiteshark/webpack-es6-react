@@ -33,29 +33,29 @@ module.exports = {
             '.html'
         ]
     },
-    devtool: 'eval-source-map', //形式直接显示你出错代码的位置
+    //devtool: 'eval-source-map', //形式直接显示你出错代码的位置
     plugins: [
         new webpack.NoErrorsPlugin(),
         //提公用js到common.js文件中
-        new webpack.optimize.CommonsChunkPlugin('vendors', 'common.js')
+        new webpack.optimize.CommonsChunkPlugin('vendors', 'common.js', Infinity),
     ],
     module: {
         loaders: [{
             test: /\.jsx?$/,
             loaders: ['babel'],
-            include: path.join(__dirname, 'src')
+            include: path.resolve('src')
         }, {
             test: /\.less$/,
-            loader: 'style!css!less',
-            include: path.resolve('css')
+            loader: 'style!css?modules&localIdentName=[name]-[local]-[hash:base64:5]!less',
+            include: path.resolve('src/css')
         }, {
             test: /\.(gif|png|jpg)$/,
-            include: path.resolve('img'),
-            loader: 'url-loader?limit=8192'
+            loader: 'url-loader?limit=8192',
+            include: path.resolve('src/img')
         }, {
             test: /\.(ttf|woff|eot|svg)$/,
-            include: path.resolve('font'),
-            loader: 'file-loader?limit=8192'
+            loader: 'file-loader?limit=8192',
+            include: path.resolve('src/font')
         }]
     }
 };
